@@ -37,6 +37,10 @@ public class VcsTutorial {
         return a * b;
     }
 
+    public float divideTwoNumbers(int a, int b) {
+        return a / b;
+    }
+
 
     public static void main(String[] args) {
         VcsTutorial vcsTutorial = new VcsTutorial(100, 30);
@@ -52,5 +56,9 @@ public class VcsTutorial {
         // call the multiplyTwoNumbers method
         result = vcsTutorial.multiplyTwoNumbers(vcsTutorial.getNumber1(), vcsTutorial.getNumber2());
         System.out.println(result);
+
+        // call the divideTwoNumbers method
+        float divisionResult = vcsTutorial.divideTwoNumbers(vcsTutorial.getNumber1(), vcsTutorial.getNumber2());
+        System.out.println(divisionResult);
     }
 }
