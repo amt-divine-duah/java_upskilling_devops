@@ -29,12 +29,20 @@ public class VcsTutorial {
         return a + b;
     }
 
+    public int subtractTwoNumbers(int a, int b) {
+        return a - b;
+    }
+
 
     public static void main(String[] args) {
-        VcsTutorial vcsTutorial = new VcsTutorial(1, 2);
+        VcsTutorial vcsTutorial = new VcsTutorial(100, 30);
 
         // call the addTwoNumbers method
         int result = vcsTutorial.addTwoNumbers(vcsTutorial.getNumber1(), vcsTutorial.getNumber2());
+        System.out.println(result);
+
+        // call the subtractTwoNumbers method
+        result = vcsTutorial.subtractTwoNumbers(vcsTutorial.getNumber1(), vcsTutorial.getNumber2());
         System.out.println(result);
     }
 }
