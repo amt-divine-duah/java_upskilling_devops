@@ -27,7 +27,7 @@ RUN ./mvnw package -Dmaven.test.skip
 FROM openjdk:21-jdk-slim
 
 # Copy build artifact
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/target/*.war SantaApp.war
 
 # Specify the command to run on container start
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+ENTRYPOINT ["java", "-jar", "SantaApp.war"]
