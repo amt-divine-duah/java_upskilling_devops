@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+
+    tools {
+        jdk 'jdk17'
+        maven 'maven3'
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/amt-divine-duah/java_upskilling_devops'
+            }
+        }
+        stage('Compile') {
+            steps {
+                sh 'cd local_deployment && mvn clean compile'
+            }
+        }
+        stage('Build Application') {
+            steps {
+                sh 'cd local_deployment && mvn clean install'
+            }
+        }
+        stage('Build & Push Docker Image') {
+            steps {
+                script {
+                    withDockerRegistry(credentialsId: 'd58a38e1-da9b-4ddd-9ee2-3269c907da90') {
+                        sh 'cd local_deployment && docker build -t jenkins_deployment:latest .'
+                        sh 'docker tag jenkins_deployment:latest santadd/jenkins_deployment:latest'
+                        sh 'docker push santadd/jenkins_deployment:latest'
+                    }
+                }
+            }
+        }
+        stage('Trigger CD Pipeline') {
+            steps {
+                build job: "Santa_CD_Pipeline", wait: true
+            }
+        }
+    }
+}
